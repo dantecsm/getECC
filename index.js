@@ -3,18 +3,27 @@ const { getEDC } = require('./edc')
 const { getECC } = require('./ecc')
 
 // 用法示例
-const buffer = fs.readFileSync('sector.bin')
-const edcBuffer = getEDC(buffer)
-const eccBuffer = getECC(buffer)
+const sectorBuffer = fs.readFileSync('sector2.bin')
+const newSectorBuffer = setEDCAndECC(sectorBuffer)
 
-// 校验 EDC 结果
-console.log(edcBuffer)
-const edcGT = buffer.subarray(16 + 2048, 16 + 2048 + 4)  // E5 FA 31 CB
-isEqual = Buffer.compare(edcBuffer, edcGT) === 0
-console.log(isEqual ? 'EDC 正确' : 'EDC 错误')
+// 校验 EDC&ECC 结果
+isEqual = Buffer.compare(newSectorBuffer, sectorBuffer) === 0
+console.log(isEqual ? 'EDC&ECC 正确' : 'EDC&ECC 错误')
 
-// 校验 ECC 结果
-console.log(eccBuffer)
-const eccGT = buffer.subarray(16 + 2048 + 4 + 8)
-isEqual = Buffer.compare(eccBuffer, eccGT) === 0
-console.log(isEqual ? 'ECC 正确' : 'ECC 错误')
+function setEDCAndECC(sectorBuffer) {
+    sectorBuffer = Buffer.from(sectorBuffer)
+
+    // 计算 edc 并填入 sectorBuffer 中
+    const edcBuffer = getEDC(sectorBuffer)
+    edcBuffer.copy(sectorBuffer, 16 + 2048)
+    // 在 edc 后面填入 8 个 00
+    const intermediateBuffer = Buffer.alloc(8)
+    intermediateBuffer.fill(0)
+    intermediateBuffer.copy(sectorBuffer, 16 + 2048 + 4)
+
+    // ecc 计算的输入包含 edc 范围，所以需要先算 edc
+    // 计算 ecc并填入 sectorBuffer 中
+    const eccBuffer = getECC(sectorBuffer)
+    eccBuffer.copy(sectorBuffer, 16 + 2048 + 4 + 8)
+    return sectorBuffer
+}
