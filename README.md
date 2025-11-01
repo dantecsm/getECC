@@ -142,7 +142,7 @@ N = (i * 43 + j * 44) % 1118
 
 ## 举例
 
-对于 **Tokimeki Mahjong Graffiti Track 01.bin** 来说，以下是一段扇区
+以 **Tokimeki Mahjong Graffiti - Toshishita no Tenshi-tachi (Japan) (Track 01).bin** 为例，这是一段扇区
 
 ```bash
 # 这是同步字节
