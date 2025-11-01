@@ -1,5 +1,5 @@
 // -----------------------------------------------------------
-// Reed-Solomon (26,24) encoder over GF(2^8)
+// Reed-Solomon (n, k) encoder over GF(2^8)
 // Primitive polynomial: x^8 + x^4 + x^3 + x^2 + 1  (0x11D)
 // Primitive element α = 0x02
 // -----------------------------------------------------------
