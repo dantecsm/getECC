@@ -2,7 +2,7 @@ const fs = require('fs')
 const { getEDC } = require('./edc')
 const { getECC } = require('./ecc')
 
-// 用法示例
+// 给定一个 CD-ROM 文件，扫描所有扇区，如果扇区是 Mode 1 的，则计算 EDC 和 ECC 并更新扇区
 const romFile = 'AV Tanjou (Japan).iso'
 const romBuffer = fs.readFileSync(romFile)
 const newROMBuffer = updateROMEDCandECC(romBuffer)
