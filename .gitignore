@@ -1,2 +1,4 @@
 node_modules/
+*.iso
+*.img
 ecc计算笔记.txt
