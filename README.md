@@ -8,6 +8,9 @@ const { getECC } = require('./ecc')
 
 const buffer = fs.readFileSync('sector.bin')
 const eccBuffer = getECC(buffer)  // input buffer: 2532-byte sector data
+
+// Note that the ECC calculation always depends on the correct EDC value in the given sector.
+// Therefore, if the EDC in the sector has not been calculated, it should be computed and set first.
 ```
 
 ## 起因
