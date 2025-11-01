@@ -1,5 +1,14 @@
 # PCE-CD/CD-ROM 的纠错码是怎么生成的？
 
+## Usage
+```javascript
+const fs = require('fs')
+const { getECC } = require('./ecc')
+
+const buffer = fs.readFileSync('sector.bin')
+const eccBuffer = getECC(buffer)
+```
+
 ## 起因
 
 为了更好地修改 PCE 的 CD-ROM ，需要研究数据修改后 ECC 码怎么生成
