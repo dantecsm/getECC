@@ -7,7 +7,7 @@ const fs = require('fs')
 const { getECC } = require('./ecc')
 
 const buffer = fs.readFileSync('sector.bin')
-const eccBuffer = getECC(buffer)
+const eccBuffer = getECC(buffer)  // input buffer: 2532-byte sector data
 ```
 
 ## 起因
