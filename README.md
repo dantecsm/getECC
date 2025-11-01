@@ -1,3 +1,6 @@
+## Description
+A Node.js implementation for calculating ECC for CD-ROMs, supports PCE-CD, Sega Saturn, and other Mode 1 CD-ROMs.
+
 ## Usage
 ```javascript
 const fs = require('fs')
@@ -16,15 +19,17 @@ const eccBuffer = getECC(buffer)
 一般我们从网上下载的光盘分为 `cue` 和 `iso/bin/img` 文件，后者就是 CD-ROM 主体，文件中每 2352 字节一个扇区，每个 `iso/bin/img` 文件是多个扇区组成，即 2352 * N
 
 一个扇区的结构：
-
+```
 2352 = 12 + (3 + 1) + 2048 + 4 + 8 + (172 + 104)
+```
 
 - Sync field：固定为 00 FF FF FF FF FF FF FF FF FF FF 00 的 12 个字节
 - Header field
     - Sector Address：3 个字节，代表 MIN，SEC 和 FRAC，即分秒帧，简称 MSF。1 分钟 = 60  秒，1 秒 = 75 帧
     - Mode：1 个字节，可以是 00，01，02，三个不同的模式影响后面的数据结构
-        
-        00 的时候后面的字节全为 00，02 的时候后面的字节全为 User Data，01 最复杂
+        - 00 的时候后面的字节全为 00
+        - 02 的时候后面的字节全为 User Data
+        - 01 最复杂
         
         因为 PCE-CD 的 Mode 总是为 01，所以后面讨论的都是 Mode 为 01 时的结构
         
@@ -65,7 +70,7 @@ P-Parity 的对象是前 (4 + 2048 + 4 + 12 = ) 2064 个字节，对应 1032 个
 
 P-Parity 是按列生成，对每列的 24 个 WORD 使用 RS(26, 24) 算法生成 2 个 WORD，43 列每列如此，得到 26 行 43 列 WORD
 
-目前认为流程是：
+流程是：
 
 - Data = 0000 0043 0086 0129 0172 … 0946 0989 ⇒ 1118 1144
 - Data = 0001 0044 0087 0130 0173 … 0947 0990 ⇒ 1033 1076
@@ -96,7 +101,7 @@ Q-Pariy 处理 26 行 43 列 WORD
 
 ![image.png](doc/image%201.png)
 
-目前认为的流程是：
+的流程是：
 
 - Data = 0000 0044 0088 … 0642 0686 0730 ⇒ 1118 1144
 - Data = 0043 0087 0131 … 0685 0729 0773 ⇒ 1119 1145
