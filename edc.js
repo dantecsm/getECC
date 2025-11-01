@@ -1,4 +1,3 @@
-// 定义 edctable 数组
 const edctable = [
     0x00000000, 0x90910101, 0x91210201, 0x01B00300,
     0x92410401, 0x02D00500, 0x03600600, 0x93F10701,
@@ -66,7 +65,6 @@ const edctable = [
     0x71C0FC00, 0xE151FD01, 0xE0E1FE01, 0x7070FF00
 ];
 
-// 定义 EDCCrc32 函数
 function getEDC(sectorBuffer) {
     const data = sectorBuffer.subarray(0, 2064)
 
