@@ -2,7 +2,7 @@ const fs = require('fs')
 const { getEDC } = require('./edc')
 const { getECC } = require('./ecc')
 
-const sectorBuffer = fs.readFileSync('sector2.bin')
+const sectorBuffer = fs.readFileSync('tests/sector2.bin')
 const edcBuffer = getEDC(sectorBuffer)
 const eccBuffer = getECC(sectorBuffer)
 

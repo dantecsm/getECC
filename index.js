@@ -3,7 +3,7 @@ const { getEDC } = require('./edc')
 const { getECC } = require('./ecc')
 
 // 用法示例
-const sectorBuffer = fs.readFileSync('sector2.bin')
+const sectorBuffer = fs.readFileSync('tests/sector2.bin')
 const newSectorBuffer = setEDCAndECC(sectorBuffer)
 
 // 校验 EDC&ECC 结果
