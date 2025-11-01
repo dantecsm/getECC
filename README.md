@@ -1,5 +1,3 @@
-# PCE-CD/CD-ROM 的纠错码是怎么生成的？
-
 ## Usage
 ```javascript
 const fs = require('fs')
