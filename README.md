@@ -13,10 +13,6 @@ const eccBuffer = getECC(buffer)  // input buffer: 2532-byte sector data
 // Therefore, if the EDC in the sector has not been calculated, it should be computed and set first.
 ```
 
-## 起因
-
-为了更好地修改 PCE 的 CD-ROM ，需要研究数据修改后 ECC 码怎么生成
-
 ## CD-ROM 的结构
 
 一般我们从网上下载的光盘分为 `cue` 和 `iso/bin/img` 文件，后者就是 CD-ROM 主体，文件中每 2352 字节一个扇区，每个 `iso/bin/img` 文件是多个扇区组成，即 2352 * N
